@@ -1,34 +1,25 @@
 import os
+import math
 from collections import defaultdict
-from preprocessing import preprocess_text_lemmatization, preprocess_text_stemming
-from nltk.util import ngrams
+import numpy as np
+from preprocessing import Preprocessor
 
-def build_index(directory):
-    index = defaultdict(set)
-    for file_name in os.listdir(directory):
-        if file_name.endswith(".txt"):
-            file_path = os.path.join(directory, file_name)
-            with open(file_path, 'r', encoding='utf-8') as file:
-                content = file.read()
-                # Preprocess the content using lemmatization
-                tokens = preprocess_text_lemmatization(content)
-                for token in tokens:
-                    # Add the file name to the index for each token
-                    index[token].add(file_name)
-    return index
+class Indexer:
+    def __init__(self, corpus_dir):
+        self.corpus_dir = corpus_dir
+        self.dictionary = defaultdict(list)
+        self.doc_lengths = {}
+        self.doc_count = 0
+        self.preprocessor = Preprocessor()
 
-def build_biword_index(directory):
-    biword_index = defaultdict(set)
-    for file_name in os.listdir(directory):
-        if file_name.endswith(".txt"):
-            file_path = os.path.join(directory, file_name)
-            with open(file_path, 'r', encoding='utf-8') as file:
-                content = file.read()
-                # Preprocess the content using stemming
-                tokens = preprocess_text_stemming(content)
-                # Generate biwords (2-grams) from the tokens
-                biword_list = ngrams(tokens, 2)
-                for biword in biword_list:
-                    # Add the file name to the biword index
-                    biword_index[biword].add(file_name)
-    return biword_index
+    def index_corpus(self):
+        for doc_id, filename in enumerate(os.listdir(self.corpus_dir)):
+            self.doc_count += 1
+            with open(os.path.join(self.corpus_dir, filename), 'r', encoding='utf-8') as file:
+                terms = self.preprocessor.preprocess(file.read())
+                term_freqs = defaultdict(int)
+                for term in terms:
+                    term_freqs[term] += 1
+                for term, freq in term_freqs.items():
+                    self.dictionary[term].append((doc_id, freq))
+                self.doc_lengths[doc_id] = np.linalg.norm([1 + math.log10(freq) for freq in term_freqs.values()])
