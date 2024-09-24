@@ -2,6 +2,7 @@ import math
 import numpy as np
 from collections import defaultdict
 
+
 class Evaluator:
     def __init__(self, indexer):
         self.indexer = indexer

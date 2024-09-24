@@ -4,6 +4,7 @@ from collections import defaultdict
 import numpy as np
 from preprocessing import Preprocessor
 
+
 class Indexer:
     def __init__(self, corpus_dir):
         self.corpus_dir = corpus_dir
