@@ -14,13 +14,10 @@ def execute_queries(searcher, preprocessor, corpus_dir, queries):
             print(f"{rank:<5} {os.listdir(corpus_dir)[doc_id]:<30} {score:<15}")
         print()
 
-def print_indexes_and_scores(indexer):
+def print_indexes(indexer):
     print("Inverted Index:")
     for term, postings in indexer.dictionary.items():
         print(f"{term}: {postings}")
-    print("\nDocument Lengths:")
-    for doc_id, length in indexer.doc_lengths.items():
-        print(f"Document {doc_id}: {length}")
 
 def main():
     corpus_dir = 'corpus'  # Directory containing the corpus of documents
@@ -33,7 +30,7 @@ def main():
         print("Menu:")
         print("1. Run Custom Input")
         print("2. Run Predefined Test Cases")
-        print("3. Print all the indexes and scores")
+        print("3. Print all the indexes")
         print("4. Exit")
         choice = input("Enter your choice: ")
 
@@ -47,7 +44,7 @@ def main():
             ]
             execute_queries(searcher, preprocessor, corpus_dir, predefined_queries)
         elif choice == '3':
-            print_indexes_and_scores(indexer)
+            print_indexes(indexer)
         elif choice == '4':
             break
         else:
