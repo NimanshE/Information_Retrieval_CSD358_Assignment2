@@ -15,18 +15,15 @@ nltk.download('wordnet', download_dir='/Users/nimanshendlay/nltk_data')
 nltk.download('punkt', download_dir='/Users/nimanshendlay/nltk_data')
 nltk.download('averaged_perceptron_tagger', download_dir='/Users/nimanshendlay/nltk_data')
 
-# Download necessary NLTK data
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt')
 
 class Preprocessor:
     def __init__(self):
-        self.stop_words = set(stopwords.words('english'))
-        self.lemmatizer = WordNetLemmatizer()
-        self.stemmer = PorterStemmer()
+        self.stop_words = set(stopwords.words('english'))  # Set of stop words
+        self.lemmatizer = WordNetLemmatizer()  # Lemmatizer for reducing words to their base form
+        self.stemmer = PorterStemmer()  # Stemmer for reducing words to their root form
 
     def preprocess(self, text):
-        terms = nltk.word_tokenize(text.lower())
+        terms = nltk.word_tokenize(text.lower())  # Tokenize and convert text to lowercase
+        # Lemmatize, stem, and remove stop words and non-alphanumeric terms
         terms = [self.stemmer.stem(self.lemmatizer.lemmatize(term)) for term in terms if term.isalnum() and term not in self.stop_words]
         return terms
