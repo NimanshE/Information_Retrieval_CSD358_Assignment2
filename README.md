@@ -1,5 +1,9 @@
 # CSD-358 Information Retrieval Assignment 2:
-### By: 
+### Github Link:
+```
+https://github.com/NimanshE/Information_Retrieval_CSD358_Assignment2
+```
+### By:
 ```
 Nimansh Endlay (2210110438) CSE'26
 Preksha Khera (2110110391) CSE'25
