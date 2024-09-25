@@ -49,7 +49,7 @@ The Vector Space Model is a powerful and intuitive method for text representatio
 
 ## Overview
 
-This project aims to implements a ranked retrieval system using the Vector Space Model (VSM). The system indexes a corpus of documents and allows for searching using free text queries. The documents are ranked by cosine similarity based on tf-idf (term frequency-inverse document frequency) scores.
+This project aims to implement a ranked retrieval system using the Vector Space Model (VSM). The system indexes a corpus of documents and allows for searching using free text queries. The documents are ranked by cosine similarity based on tf-idf (term frequency-inverse document frequency) scores.
 
 ## Files and Their Functions
 
@@ -107,7 +107,7 @@ This file contains the `Preprocessor` class, which is responsible for:
 4. **Menu Options**:
     - **Run Custom Input**: Enter your query when prompted.
     - **Run Predefined Test Cases**: The application will run predefined queries.
-    - **Print all the indexes and scores**: Displays the inverted index and document lengths.
+    - **Print all the indexes**: Displays the inverted index.
     - **Exit**: Terminates the application.
 
 ## Explanation
